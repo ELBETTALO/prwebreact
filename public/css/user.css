@@ -1,0 +1,51 @@
+body {
+    background-color: white;
+}
+
+table {
+    border: 1px solid lightblue;
+    color: blue;
+}
+
+tr {
+    background-color: white;
+    color: blue;
+}
+
+td {
+    border: 1px solid blue;
+    color: blue;
+}
+
+th {
+    background-color: blue;
+    color: white;
+}
+
+h1 {
+    margin: 0 0 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: blue;
+}
+
+img.icon {
+    display: inline;
+    height: 20px;
+}
+
+.user {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+button  {padding-left: 95px ;
+    padding-right :95px ;
+    background-color: blue;
+    color: white;
+
+
+
+}
