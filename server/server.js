@@ -34,54 +34,105 @@ app.post('/authenticate', function (req, res) {
 app.post("/users", function (req, res) {
     var sqlRequest = "SELECT * FROM Person ORDER BY Person_LastName , Person_FirstName";
     var values = [];
-    getSQLResult(req , res , sqlRequest,values);
-    
-    
+    getSQLResult(req, res, sqlRequest, values);
+
+
 });
 
 app.post("/user", function (req, res) {
-    var id = req.body.id ;
+    var id = req.body.id;
     var sqlRequest = "SELECT * FROM Person WHERE person_id=$1";
     var values = [id];
-    getSQLResult(req , res , sqlRequest,values);
-    
+    getSQLResult(req, res, sqlRequest, values);
+
 });
 
 
-app.post("/saveUser", function(req, res) {
-	var person_id = req.body.person_id;
-	var person_firstname = req.body.person_firstname;
-	var person_lastname = req.body.person_lastname;
-	var person_birthdate = req.body.person_birthdate;
+app.post("/saveUser", function (req, res) {
+    var person_id = req.body.person_id;
+    var person_firstname = req.body.person_firstname;
+    var person_lastname = req.body.person_lastname;
+    var person_birthdate = req.body.person_birthdate;
 
-	var sqlRequest = "";
-	var values = [];
-	// We build a request that returns ID value to be able to returns its value (Person_ID)
-	if (person_id < 0) {
-		sqlRequest = "INSERT INTO Person(Person_FirstName, Person_LastName, Person_BirthDate)"
-		+ " VALUES ($1, $2, $3)"
-		+ " RETURNING Person_ID";
-		values = [person_firstname, person_lastname, person_birthdate];
-	} else {
-		sqlRequest = "UPDATE Person SET"
-		+ " Person_FirstName=$1, Person_LastName=$2, Person_BirthDate=$3"
-		+ " WHERE Person_ID=$4"
-		+ " RETURNING Person_ID";
-		values = [person_firstname, person_lastname, person_birthdate, person_id];
-	}
-	getSQLResult(req, res, sqlRequest, values);
+    var sqlRequest = "";
+    var values = [];
+    // We build a request that returns ID value to be able to returns its value (Person_ID)
+    if (person_id < 0) {
+        sqlRequest = "INSERT INTO Person(Person_FirstName, Person_LastName, Person_BirthDate)"
+            + " VALUES ($1, $2, $3)"
+            + " RETURNING Person_ID";
+        values = [person_firstname, person_lastname, person_birthdate];
+    } else {
+        sqlRequest = "UPDATE Person SET"
+            + " Person_FirstName=$1, Person_LastName=$2, Person_BirthDate=$3"
+            + " WHERE Person_ID=$4"
+            + " RETURNING Person_ID";
+        values = [person_firstname, person_lastname, person_birthdate, person_id];
+    }
+    getSQLResult(req, res, sqlRequest, values);
 });
 
 
 
-app.post("/deleteUser", function(req, res) {
-	var person_id = req.body.person_id;
+app.post("/deleteUser", function (req, res) {
+    var person_id = req.body.person_id;
 
-	var sqlRequest = "DELETE FROM Person WHERE Person_ID=$1";
-	var values = [person_id];
-	getSQLResult(req, res, sqlRequest, values);
+    var sqlRequest = "DELETE FROM Person WHERE Person_ID=$1";
+    var values = [person_id];
+    getSQLResult(req, res, sqlRequest, values);
 });
 
+
+
+app.post("/books", function (req, res) {
+    var sqlRequest = "SELECT * FROM BOOK ORDER BY Book_title , Book_authors";
+    var values = [];
+    getSQLResult(req, res, sqlRequest, values);
+
+
+});
+
+app.post("/book", function (req, res) {
+    var id = req.body.id;
+    var sqlRequest = "SELECT * FROM Book WHERE book_id=$1";
+    var values = [id];
+    getSQLResult(req, res, sqlRequest, values);
+
+});
+
+
+app.post("/saveBook", function (req, res) {
+    var book_id = req.body.book_id;
+    var book_title = req.body.book_title;
+    var book_authors = req.body.book_authors;
+
+    var sqlRequest = "";
+    var values = [];
+    // We build a request that returns ID value to be able to returns its value (Person_ID)
+    if (book_id < 0) {
+        sqlRequest = "INSERT INTO Book(book_title, book_authors)"
+            + " VALUES ($1, $2 )"
+            + " RETURNING Book_ID";
+        values = [book_title, book_authors];
+    } else {
+        sqlRequest = "UPDATE Book SET "
+            + "  Book_title=$1, Book_authors=$2 "
+            + " WHERE Book_ID=$3"
+            + " RETURNING Book_ID";
+        values = [book_title, book_authors, book_id];
+    }
+    getSQLResult(req, res, sqlRequest, values);
+});
+
+
+
+app.post("/deleteBook", function (req, res) {
+    var book_id = req.body.book_id;
+
+    var sqlRequest = "DELETE FROM Book WHERE Book_ID=$1";
+    var values = [book_id];
+    getSQLResult(req, res, sqlRequest, values);
+});
 
 
 
