@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { useLocation } from 'react-router-dom';
 import { postServiceData, stringToDate } from './util';
 import { Navigate } from "react-router-dom";
+import { Borrows } from './Borrows';
 
 //Hook def
 
@@ -14,6 +15,17 @@ const User = ({getToken}) => {
     }
 
 };
+
+
+class DisplayBorrow extends Component {
+    render() {
+		if (this.props.person_id > 0) {
+			return <Borrows person_id={this.props.person_id}/>
+		} else {
+			return <div />
+		}
+	}
+}
 
 
 
@@ -117,6 +129,7 @@ class UserClass extends Component {
                         </div>
                     </div>
                 </div>
+                <DisplayBorrow person_id={this.state.person_id}/>
             </div>
         )
     }

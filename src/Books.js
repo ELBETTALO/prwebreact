@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Navigate } from "react-router-dom";
 import { postServiceData } from "./util";
-import NavBar from "./NavBar";
+import { NavBar } from "./NavBar";
+
 
 class Books extends Component {
 

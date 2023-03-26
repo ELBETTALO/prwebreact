@@ -137,6 +137,53 @@ app.post("/deleteBook", function (req, res) {
 
 
 
+
+
+app.post("/borrows", function(req, res) {
+	var person_id = req.body.person_id;
+	var sqlRequest = "SELECT Borrow.*, Book_Title FROM Borrow JOIN Book USING (Book_ID) WHERE Person_ID=$1 ORDER BY Borrow_ID";
+	var values = [person_id];
+	getSQLResult(req, res, sqlRequest, values);
+});
+
+app.post("/borrow", function(req, res) {
+	var id = req.body.id;
+	var sqlRequest = "SELECT Borrow.*, Book_Title FROM Borrow JOIN Book USING (Book_ID) WHERE Borrow_ID=$1";
+	var values = [id];
+	getSQLResult(req, res, sqlRequest, values);
+});
+
+app.post("/returnBook", function(req, res) {
+	var borrow_id = req.body.borrow_id;
+	var borrow_return = req.body.borrow_return;
+    console.log(borrow_id, borrow_return);
+    
+	var sqlRequest = "UPDATE Borrow SET"
+	+ " Borrow_Return=$1"
+	+ " WHERE Borrow_ID=$2"
+	+ " RETURNING Borrow_ID";
+	var values = [borrow_return, borrow_id];
+	getSQLResult(req, res, sqlRequest, values);
+});
+
+app.post("/saveBorrow", function(req, res) {
+	var person_id = req.body.person_id;
+	var book_id = req.body.book_id;
+	var borrow_date = req.body.borrow_date;
+
+	var sqlRequest = "";
+	var values = [];
+	// We build a request that returns ID value to be able to returns its value (Borrow_ID)
+	sqlRequest = "INSERT INTO Borrow(Person_ID, Book_ID, Borrow_Date)"
+	+ " VALUES ($1, $2, $3)"
+	+ " RETURNING Borrow_ID";
+	values = [person_id, book_id, borrow_date];
+	getSQLResult(req, res, sqlRequest, values);
+});
+
+
+
+
 function getSQLResult(req, res, sqlRequest, values) {
     var client = new pg.Client(conString);
     client.connect(function (err) {
