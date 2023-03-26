@@ -1,6 +1,6 @@
 # prwebreact
 ## Description
-This is a project that I built using React and Node.js for a library website in my Prweb course at Centrale Nantes. The project allows users to browse, search, and borrow books from a library database. 
+This is a project that I built using React and Node.js for a library website in my Prweb course at Centrale Nantes. The project is a basic website that allows users to borrow books from a library database. 
 
 # Getting Started with Create React App
 
