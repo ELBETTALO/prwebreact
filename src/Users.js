@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Navigate } from "react-router-dom";
 import { postServiceData } from "./util";
+import NavBar from "./NavBar";
 
 
 class Users extends Component {
@@ -39,16 +40,7 @@ class Users extends Component {
         }
         return (
             <div>
-                <nav className="navbar navbar-expand-md navbar-dark bg-primary">
-                    <div className="container">
-                        <div className="collapse navbar-collapse" id="navbar1">
-                            <ul className="navbar-nav ml-auto">
-                                <li className="nav-item"> <a className="nav-link text-white" href="users.html">Users</a></li>
-                                <li className="nav-item"> <a className="nav-link text-white" href="books.html">Books</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
+                <NavBar/>
                 <div className="py-3">
                     <div className="container">
                         <div className="row">
@@ -93,7 +85,6 @@ class UsersInList extends Component {
 
     render() {
         let users = this.props.users;
-        console.log(users);
         return (
             <tbody>
                 {users.map((user) => <UserInList user={user} key={user.person_id} />)}

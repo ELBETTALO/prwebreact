@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Navigate } from "react-router-dom";
 import { postServiceData } from "./util";
-
+import NavBar from "./NavBar";
 
 class Books extends Component {
 
@@ -29,26 +29,17 @@ class Books extends Component {
     }
 
     render() {
-        /*const token = this.props.getToken();
+        const token = this.props.getToken();
         if (!token) {
             return <Navigate to="/" />;
 
-        }*/
+        }
         if (this.state.createNew) {
             return <Navigate to="/book" state={{ id: "NEW" }} />;
         }
         return (
             <div>
-                <nav className="navbar navbar-expand-md navbar-dark bg-primary">
-                    <div className="container">
-                        <div className="collapse navbar-collapse" id="navbar1">
-                            <ul className="navbar-nav ml-auto">
-                                <li className="nav-item"> <a className="nav-link text-white" href="users.html">Users</a></li>
-                                <li className="nav-item"> <a className="nav-link text-white" href="books.html">Books</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
+                <NavBar/>
                 <div className="py-3">
                     <div className="container">
                         <div className="row">
