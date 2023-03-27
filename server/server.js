@@ -135,6 +135,12 @@ app.post("/deleteBook", function (req, res) {
 });
 
 
+app.post("/borrowsAll", function(req, res) {
+    var sqlRequest = "SELECT Borrow.*, Book_Title, Person_FirstName, Person_LastName "
+    + "FROM Borrow JOIN Book USING (Book_ID) JOIN Person USING (Person_ID) WHERE Borrow.borrow_return IS NULL";
+    var values = [];
+    getSQLResult(req, res, sqlRequest, values);
+});
 
 
 
@@ -156,8 +162,7 @@ app.post("/borrow", function(req, res) {
 app.post("/returnBook", function(req, res) {
 	var borrow_id = req.body.borrow_id;
 	var borrow_return = req.body.borrow_return;
-    console.log(borrow_id, borrow_return);
-    
+
 	var sqlRequest = "UPDATE Borrow SET"
 	+ " Borrow_Return=$1"
 	+ " WHERE Borrow_ID=$2"

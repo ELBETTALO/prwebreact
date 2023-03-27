@@ -5,6 +5,7 @@ import Users from './Users';
 import Books from './Books';
 import Book from './Book';
 import User from './User';
+import Borrow from './Borrow';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function setToken(userToken) {
@@ -37,6 +38,7 @@ class App extends Component {
             <Route exact path="/user" element={<User getToken={getToken} />} />
             <Route exact path="/books" element={<Books getToken={getToken} />} />
             <Route exact path="/book" element={<Book getToken={getToken} />} />
+            <Route exact path="/borrows" element={<Borrow getToken={getToken} />} />
           </Routes>
 
         </Router>
